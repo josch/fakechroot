@@ -19,11 +19,11 @@
 
 
 #include <config.h>
-
-#ifdef HAVE_FOPEN64
-
 #define _LARGEFILE64_SOURCE
 #include <stdio.h>
+
+#if defined(HAVE_FOPEN64) && !defined(fopen64)
+
 #include "libfakechroot.h"
 
 

@@ -19,14 +19,14 @@
 
 
 #include <config.h>
-
-#ifdef HAVE_FSTATAT64
-
 #define _ATFILE_SOURCE
 #define _POSIX_C_SOURCE 200809L
 #define _LARGEFILE64_SOURCE
 #include <sys/stat.h>
 #include <limits.h>
+
+#if defined(HAVE_FSTATAT64) && !defined(fstatat64)
+
 #include "libfakechroot.h"
 
 wrapper(fstatat64, int, (int dirfd, const char *pathname, struct stat64 *buf, int flags))

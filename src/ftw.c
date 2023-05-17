@@ -72,6 +72,8 @@ char *alloca ();
 #include <string.h>
 #include <unistd.h>
 
+#if !(defined(__FTW64_C) && defined(ftw64))
+
 /* By default we have none.  Map the name to the normal functions.  */
 #define open_not_cancel(name, flags, mode) \
   __libc_open (name, flags, mode)
@@ -196,6 +198,17 @@ int rpl_lstat (const char *, struct stat *);
 # endif
 # define FTW_FUNC_T __ftw_func_t
 # define NFTW_FUNC_T __nftw_func_t
+#endif
+#ifndef __GLIBC__
+  typedef int (*__ftw_func_t)(const char *, const struct stat *, int);
+  typedef int (*__nftw_func_t)(const char *, const struct stat *, int, struct FTW *);
+#endif
+#if !NEW_GLIBC
+# define FTW_ACTIONRETVAL 16
+# define FTW_CONTINUE 0
+# define FTW_STOP 1
+# define FTW_SKIP_SUBTREE 2
+# define FTW_SKIP_SIBLINGS 3
 #endif
 
 #define macro_stringify(name) macro_stringify2(name)
@@ -585,7 +598,7 @@ fail:
 
   /* Next, update the `struct FTW' information.  */
   ++data->ftw.level;
-  startp = __rawmemchr (data->dirbuf, '\0');
+  startp = strchr (data->dirbuf, '\0');
   /* There always must be a directory name.  */
   assert (startp != data->dirbuf);
   if (startp[-1] != '/')
@@ -934,6 +947,10 @@ NFTW_OLD_NAME (path, func, descriptors, flags)
 compat_symbol (libc, NFTW_OLD_NAME, NFTW_NAME, GLIBC_2_1);
 # endif
 #endif
+#endif
+
+#else
+typedef int empty_translation_unit;
 #endif
 
 #else

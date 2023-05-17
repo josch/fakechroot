@@ -19,14 +19,14 @@
 
 
 #include <config.h>
-
-#ifdef HAVE_OPENAT64
-
 #define _LARGEFILE64_SOURCE
 #define _ATFILE_SOURCE
 #include <stdarg.h>
 #include <stddef.h>
 #include <fcntl.h>
+
+#if defined(HAVE_OPENAT64) && !defined(openat64)
+
 #include "libfakechroot.h"
 
 

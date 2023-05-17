@@ -37,7 +37,11 @@
  * as potentially configured in /etc/nsswitch.conf.
  */
 
-#include <gnu/libc-version.h>
+#if defined __has_include
+#  if __has_include(<gnu/libc-version.h>)
+#    include <gnu/libc-version.h>
+#  endif
+#endif
 #if __GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 32)
 
 #include <stdlib.h>

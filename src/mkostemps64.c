@@ -19,13 +19,12 @@
 
 
 #include <config.h>
-
-#ifdef HAVE_MKOSTEMPS64
-
 #define _GNU_SOURCE
 #define _LARGEFILE64_SOURCE
 #include <errno.h>
 #include <stdlib.h>
+
+#if defined(HAVE_MKOSTEMPS64) && !defined(mkostemps64)
 
 #include "libfakechroot.h"
 #include "strlcpy.h"

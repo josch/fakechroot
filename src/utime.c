@@ -19,10 +19,11 @@
 
 
 #include <config.h>
-
 #include <utime.h>
-#include "libfakechroot.h"
 
+#if !_REDIR_TIME64
+
+#include "libfakechroot.h"
 
 wrapper(utime, int, (const char * filename, const struct utimbuf * buf))
 {
@@ -32,3 +33,7 @@ wrapper(utime, int, (const char * filename, const struct utimbuf * buf))
     expand_chroot_path(filename);
     return nextcall(utime)(filename, buf);
 }
+
+#else
+typedef int empty_translation_unit;
+#endif
