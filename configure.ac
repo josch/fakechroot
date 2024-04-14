@@ -165,6 +165,7 @@ AC_CHECK_FUNCS(m4_normalize([
     __getcwd_chk
     __getwd_chk
     __lstat64_time64
+    __lutimes64
     __lxstat
     __lxstat64
     __open

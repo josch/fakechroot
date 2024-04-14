@@ -6,6 +6,7 @@ libfakechroot_la_SOURCES = \
     __getcwd_chk.c \
     __getwd_chk.c \
     __lstat64_time64.c \
+    __lutimes64.c \
     __lxstat.c \
     __lxstat64.c \
     __lxstat64.h \
