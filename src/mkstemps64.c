@@ -19,13 +19,12 @@
 
 
 #include <config.h>
-
-#ifdef HAVE_MKSTEMPS64
-
 #define _DEFAULT_SOURCE
 #define _LARGEFILE64_SOURCE
 #include <errno.h>
 #include <stdlib.h>
+
+#if defined(HAVE_MKSTEMPS64) && !defined(mkstemps64)
 
 #include "libfakechroot.h"
 #include "strlcpy.h"

@@ -19,11 +19,11 @@
 
 
 #include <config.h>
-
-#ifdef HAVE_SCANDIR64
-
 #define _LARGEFILE64_SOURCE
 #include <dirent.h>
+
+#if defined(HAVE_SCANDIR64) && !defined(scandir64)
+
 #include "libfakechroot.h"
 
 

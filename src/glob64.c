@@ -19,11 +19,11 @@
 
 
 #include <config.h>
-
-#ifdef HAVE_GLOB64
-
 #define _LARGEFILE64_SOURCE
 #include <glob.h>
+
+#if defined(HAVE_GLOB64) && !defined(glob64)
+
 #include "libfakechroot.h"
 
 

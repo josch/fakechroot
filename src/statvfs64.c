@@ -19,11 +19,11 @@
 
 
 #include <config.h>
-
-#ifdef HAVE_STATVFS64
-
 #define _LARGEFILE64_SOURCE
 #include <sys/statvfs.h>
+
+#if defined(HAVE_STATVFS64) && !defined(statvfs64)
+
 #include "libfakechroot.h"
 
 
